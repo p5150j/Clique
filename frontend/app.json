@@ -26,15 +26,7 @@
     "web": {
       "favicon": "./assets/favicon.png",
       "config": {
-        "firebase": {
-          "apiKey": "AIzaSyDQDJ4mvDfJT2T8RNbJfA06q7Ia2BidNkA",
-          "authDomain": "tiktok-2cf9c.firebaseapp.com",
-          "projectId": "tiktok-2cf9c",
-          "storageBucket": "tiktok-2cf9c.appspot.com",
-          "messagingSenderId": "580162516179",
-          "appId": "1:580162516179:web:d58d7a69e6eda812f45026",
-          "measurementId": "${config.measurementId}"
-        }
+        "firebase": {}
       }
     }
   }
