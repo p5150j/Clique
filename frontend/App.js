@@ -12,6 +12,7 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 
 import Constants from "expo-constants";
 import AuthScreen from "./src/screens/auth";
+import Route from "./src/navigation/main";
 
 // if (firebase.apps.lenght === 0) {
 //   firebase.initializeApp(Constants.manifest.web.config.firebase);
@@ -24,7 +25,7 @@ firebase.initializeApp({
 export default function App() {
   return (
     <Provider store={store}>
-      <AuthScreen />
+      <Route />
     </Provider>
   );
 }
