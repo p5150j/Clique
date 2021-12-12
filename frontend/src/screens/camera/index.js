@@ -70,6 +70,9 @@ export default function CameraScreen() {
         if (videoRecordPromise) {
           const data = await videoRecordPromise;
           const source = data.uri;
+          console.log(
+            "this one is comming from the camera recordiong" + source
+          );
           //TODO: pass video uri into save component
           navigation.navigate("savePost", { source });
         }
@@ -92,7 +95,7 @@ export default function CameraScreen() {
       aspect: [16, 9],
       quality: 1,
     });
-    console.log(result);
+    console.log("this one is comming from the meida gallery" + result);
     if (!result.cancelled) {
       navigation.navigate("savePost", { source: result.uri });
     }
@@ -153,13 +156,13 @@ export default function CameraScreen() {
             <TouchableOpacity
               disabled={!isCameraReady}
               onLongPress={() => recordVideo()}
-              onLongPress={() =>
-                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)
-              }
+              // onLongPress={() =>
+              //   Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)
+              // }
               onPressOut={() => stopVideo()}
-              onPressOut={() =>
-                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)
-              }
+              // onPressOut={() =>
+              //   Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)
+              // }
               style={styles.recordButton}
             />
           </View>
