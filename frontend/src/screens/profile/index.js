@@ -13,10 +13,11 @@ export default function ProfileScreen() {
   return (
     <View style={styles.container}>
       <ProfileNavBar user={currentUser} />
-      <ProfileHeader user={currentUser} />
-      <ProfilePostList posts={currentUserPosts} />
 
-      <ScrollView></ScrollView>
+      <ScrollView>
+        <ProfileHeader user={currentUser} />
+        <ProfilePostList posts={currentUserPosts} />
+      </ScrollView>
     </View>
   );
 }

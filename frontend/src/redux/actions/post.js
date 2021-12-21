@@ -1,9 +1,12 @@
 import firebase from "firebase";
-import { saveMediaToStorage } from "./random";
+import { saveMediaToStorage } from "../../services/random";
 require("firebase/firebase-auth");
 require("firebase/firestore");
 import uuid from "uuid-random";
 import { CURRENT_USER_POSTS_UPDATE } from "../constants";
+
+// const posterAvatar = firebase.auth().currentUser;
+// console.log(posterAvatar);
 
 export const createPost = (description, video, thumbnail) => (dispatch) =>
   new Promise((resolve, reject) => {
@@ -11,7 +14,7 @@ export const createPost = (description, video, thumbnail) => (dispatch) =>
     let allSavePromises = Promise.all([
       saveMediaToStorage(
         video,
-        `post/${firebase.auth().currentUser.uid}/${storagePostId}/video`
+        `post/${firebase.auth().currentUser.uid}/${storagePostId}/video.mov`
       ),
       saveMediaToStorage(
         thumbnail,
@@ -28,6 +31,9 @@ export const createPost = (description, video, thumbnail) => (dispatch) =>
             creator: firebase.auth().currentUser.uid,
             media,
             description,
+            // I need to some how get the photoURL from the user document and add it the post document when a new video-post is made
+            userPhotoURL:
+              "http://need-to-get-the-photoURL-from-users-docs-and-add-it-here",
             likesCount: 0,
             commentsCount: 0,
             creation: firebase.firestore.FieldValue.serverTimestamp(),

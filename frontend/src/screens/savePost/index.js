@@ -10,12 +10,22 @@ import {
 } from "react-native";
 import styles from "./styles";
 import { Feather } from "@expo/vector-icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../../redux/actions";
 
 export default function SavePostScreen(props) {
-  console.log("this is the route params == " + props.route.params.source);
+  // console.log("this is the route params == " + props.route.params.source);
+
   const [description, setDescription] = useState("");
+  // const [currentUserAvatarURL, setCurrentUserAvatarURL] =
+  //   useState("foobar baz");
+
+  // const currentUserAvatarURL = useSelector(
+  //   (state) => state.auth.currentUser.photoURL
+  // );
+
+  // console.log(currentUserAvatarURL);
+
   const [requestRunning, setRequestRunning] = useState(false);
 
   const navigation = useNavigation();
@@ -26,6 +36,7 @@ export default function SavePostScreen(props) {
     dispatch(
       createPost(
         description,
+        // currentUserAvatarURL,
         props.route.params.source,
         props.route.params.sourceThumb
       )

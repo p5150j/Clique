@@ -13,12 +13,6 @@ import * as Haptics from "expo-haptics";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
 
-/**
- * Function that renders a component responsible showing
- * a view with the camera preview, recording videos, controling the camera and
- * letting the user pick a video from the gallery
- * @returns Functional Component
- */
 export default function CameraScreen() {
   const [hasCameraPermissions, setHasCameraPermissions] = useState(false);
   const [hasAudioPermissions, setHasAudioPermissions] = useState(false);
