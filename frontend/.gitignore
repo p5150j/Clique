@@ -11,5 +11,6 @@ npm-debug.*
 web-build/
 
 # macOS
+
 .DS_Store
-app.json
+.DS_Store?
