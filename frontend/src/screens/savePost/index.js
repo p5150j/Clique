@@ -14,17 +14,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../../redux/actions";
 
 export default function SavePostScreen(props) {
-  // console.log("this is the route params == " + props.route.params.source);
+  const auth = useSelector((state) => state.auth);
 
-  const [description, setDescription] = useState("");
-  // const [currentUserAvatarURL, setCurrentUserAvatarURL] =
-  //   useState("foobar baz");
-
-  // const currentUserAvatarURL = useSelector(
-  //   (state) => state.auth.currentUser.photoURL
+  // console.log(
+  //   "currect user url is ///////////////== " + auth.currentUser.photoURL
   // );
 
-  // console.log(currentUserAvatarURL);
+  const [description, setDescription] = useState("");
+  const [userPhotoURL, setUserPhotoURL] = useState(auth.currentUser.photoURL);
 
   const [requestRunning, setRequestRunning] = useState(false);
 
@@ -36,7 +33,7 @@ export default function SavePostScreen(props) {
     dispatch(
       createPost(
         description,
-        // currentUserAvatarURL,
+        userPhotoURL,
         props.route.params.source,
         props.route.params.sourceThumb
       )
@@ -49,6 +46,20 @@ export default function SavePostScreen(props) {
     return (
       <View style={styles.uploadingContainer}>
         <ActivityIndicator color="red" size="large" />
+        <Text
+          style={{
+            position: "absolute",
+            bottom: 100,
+            // width: 350,
+            fontSize: 30,
+            paddingLeft: 30,
+            paddingRight: 20,
+            color: "rgba(0, 0, 0, 0.2)",
+          }}
+        >
+          Robots are compessing your video for optumum quality and maxumum
+          lovablity...please dont close the app
+        </Text>
       </View>
     );
   }
@@ -63,9 +74,16 @@ export default function SavePostScreen(props) {
           onChangeText={(text) => setDescription(text)}
           placeholder="Describe your video"
         />
+
+        <TextInput
+          hidden
+          multiline
+          onChangeText={(text) => ssetUserPhotoURL(text)}
+        />
+
         <Image
           style={styles.mediaPreview}
-          source={{ uri: props.route.params.source }}
+          source={{ uri: props.route.params.sourceThumb }}
         />
       </View>
 

@@ -7,11 +7,11 @@ export default function ProfileNavBar({ user }) {
   return (
     <View style={styles.container}>
       <TouchableOpacity>
-        <Feather name="search" size={20} />
+        <Feather name="search" size={20} color={"white"} />
       </TouchableOpacity>
       <Text style={styles.text}>{user.displayName}</Text>
       <TouchableOpacity>
-        <Feather name="menu" size={24} />
+        <Feather name="menu" size={24} color={"white"} />
       </TouchableOpacity>
     </View>
   );

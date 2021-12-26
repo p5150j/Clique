@@ -3,9 +3,10 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import styles from "./styles";
 
 export default function SearchUserItem({ item }) {
-  //   console.log("this is from userItem" + item.photoURL);
+  // console.log("this is from userItem" + item.email);
   return (
     <TouchableOpacity style={styles.container}>
+      <Text style={styles.text}>{item.email}</Text>
       <Text style={styles.text}>{item.displayName}</Text>
       <Image style={styles.image} source={{ uri: item.photoURL }} />
     </TouchableOpacity>

@@ -49,19 +49,3 @@ export const queryUsersByEmail = (email) =>
       })
       .catch(() => reject());
   });
-
-// export const queryUsersByEmail = (email) =>
-//   new Promise((resolve, reject) => {
-//     firebase
-//       .firestore().collection("user")
-//       .get()
-//       .then((snapshot) => {
-//         let userURL = snapshot.docs.map((doc) => {
-//           const data = doc.data();
-//           const id = doc.photoURL;
-//           return { id, ...data };
-//         });
-//         resolve(userURL);
-//       })
-//       .catch(() => reject());
-//   });

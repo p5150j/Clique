@@ -13,7 +13,11 @@ export default function NewHomeFeed({ navigation }) {
   }, []);
 
   return (
-    <ContainerView>
+    <ContainerView
+      style={{
+        paddingTop: 50,
+      }}
+    >
       <ScrollView>
         <CardHeader>The first feed</CardHeader>
         <ScrollView
@@ -30,6 +34,7 @@ export default function NewHomeFeed({ navigation }) {
                   navigation.navigate("postDetails", {
                     videoURLFirebase: item.media[0],
                     imageAssetURLFirebase: item.media[1],
+                    userPhotoURL: item.userPhotoURL,
                     postDescription: item.description,
                   });
                 }}
@@ -37,8 +42,8 @@ export default function NewHomeFeed({ navigation }) {
                 <Card
                   postImage={{ uri: item.media[1] }}
                   title={item.description}
-                  //need to update this when I figure out how to get the user image
-                  avatarImage={{ uri: item.media[1] }}
+                  //need to update this when I figure out how to get the user image photoURL
+                  avatarImage={{ uri: item.userPhotoURL }}
                   userName={item.creator}
                 />
               </TouchableOpacity>
@@ -46,6 +51,29 @@ export default function NewHomeFeed({ navigation }) {
           ))}
         </ScrollView>
         <CardHeader>The 2nd feed</CardHeader>
+
+        {posts.map((item, index) => (
+          <>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("postDetails", {
+                  videoURLFirebase: item.media[0],
+                  imageAssetURLFirebase: item.media[1],
+                  userPhotoURL: item.userPhotoURL,
+                  postDescription: item.description,
+                });
+              }}
+            >
+              <CardLarge
+                postImage={{ uri: item.media[1] }}
+                title={item.description}
+                //need to update this when I figure out how to get the user image photoURL
+                avatarImage={{ uri: item.userPhotoURL }}
+                userName={item.creator}
+              />
+            </TouchableOpacity>
+          </>
+        ))}
       </ScrollView>
     </ContainerView>
   );
@@ -53,7 +81,7 @@ export default function NewHomeFeed({ navigation }) {
 
 const ContainerView = styled.View`
   flex: 1;
-  background-color: black;
+  background-color: "rgba(0,0,0, 1)";
   justify-content: center;
   align-items: center;
 `;

@@ -13,7 +13,7 @@ export const getFeed = () =>
           return { id, ...data };
         });
         resolve(posts);
-        console.log(posts);
+        // console.log(posts);
       })
       .catch(() => reject());
   });

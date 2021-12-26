@@ -5,7 +5,6 @@ import { Feather } from "@expo/vector-icons";
 import CameraScreen from "../../screens/camera";
 import ProfileScreen from "../../screens/profile";
 import SearchScreen from "../../screens/search";
-import FeedScreen from "../../screens/feed";
 import NewHomeFeed from "../../screens/newDesign";
 
 const Tab = createMaterialBottomTabNavigator();

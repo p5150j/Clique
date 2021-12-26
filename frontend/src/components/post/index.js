@@ -21,7 +21,7 @@ export const PostSingle = forwardRef(({ item }, parentRef) => {
   }, []);
 
   const play = async () => {
-    console.log("play");
+    // console.log("play");
     if (ref.current == null) {
       return;
     }
@@ -56,7 +56,7 @@ export const PostSingle = forwardRef(({ item }, parentRef) => {
   };
 
   const unload = async () => {
-    console.log("unloaded");
+    // console.log("unloaded");
     if (ref.current == null) {
       return;
     }

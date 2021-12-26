@@ -57,7 +57,7 @@ const UserPic = styled.Image`
   height: 44px;
   border-radius: 22px;
   margin-right: 10px;
-  /* border: 1px solid white; */
+  border: 1px solid white;
 `;
 
 const LikeBtn = styled.Text`

@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    color: "white",
     padding: 10,
     flexDirection: "row",
     alignItems: "center",
@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
   text: {
     flex: 1,
     fontSize: 16,
+    color: "white",
   },
   image: {
     backgroundColor: "gray",

@@ -18,9 +18,11 @@ export default function SearchScreen({ item }) {
       <TextInput
         onChangeText={setTextInput}
         style={styles.textInput}
-        placeholder={"Search"}
+        placeholder={"Search..."}
+        placeholderTextColor="white"
       />
       <FlatList
+        style={styles.list}
         data={searchUsers}
         renderItem={SearchUserItem}
         keyExtractor={(item) => item.id}

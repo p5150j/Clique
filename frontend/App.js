@@ -12,6 +12,7 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 import Constants from "expo-constants";
 import AuthScreen from "./src/screens/auth";
 import Route from "./src/navigation/main";
+import { StatusBar } from "expo-status-bar";
 
 // if (firebase.apps.lenght === 0) {
 //   firebase.initializeApp(Constants.manifest.web.config.firebase);
@@ -25,6 +26,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <Route />
+      <StatusBar style="light" />
     </Provider>
   );
 }
