@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&display=swap');
+body{
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 900;
+  margin: 0;
+  font-size: 20px;;
+  padding: 0;
+}
+
+.hero{
+  background: url('/src/images/wallpaper3.jpg');
+  height: 920px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.heroGroup{
+  margin: 0 auto;
+  max-width: 700px;
+  padding: 150px 50px;
+  text-align: center;
+}
+
+.heroGroup h1{
+margin: 0;
+    color: white;
+    font-size: 70px;
+    line-height: 1.2;
+    padding-top: 106px;
+}
+
+.heroGroup p{
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+
+  line-height: 1.5;
+  font-weight: 300;
+      font-size: 20px;
+  
+}
+
+.logos{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.logos img{
+  margin-right: 20px;
+}
+
+.hero svg{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.feedContainer{
+  max-width: 1200px;
+  margin: 0 auto;
+  position: "relative";
+}
+
+.feedImages{
+  margin: 20px;
+  width: 250px;
+  height: 370px;
+  border-radius: 14px;
+  object-fit: cover;
+  box-shadow: 0px 5px 15px rgba(0,0,0, 0.25);
+}
+
+.moveUp{
+ margin-top: -144px;
+    position: absolute;
+}
+
+
+video{
+
+    position: absolute;
+    top: 86px;
+    right: 73px;
+    width: 328px;
+    border-radius: 41px;
+    /* height: 730px; */
+    background-color: #00000085;
+    transform: rotate( 
+12deg);
+    border: 14px solid black;
+    transform: skew( 
+363deg, 
+349deg);
+    border-right: 20px solid #202020;
+    border-bottom: 20px solid #202020;
+}
+
+
+
+/* /////// mobile */
+
+@media only screen and (max-width: 600px) {
+  .hero{
+
+  height: 920px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.heroGroup{
+  margin: 0 auto;
+  max-width: 700px;
+  padding: 100px 50px;
+  text-align: center;
+}
+
+.heroGroup h1{
+margin: 0;
+    color: white;
+    font-size: 40px;
+    line-height: 1.2;
+    padding-top: 106px;
+}
+
+.heroGroup p{
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+
+  line-height: 1.5;
+  font-weight: 300;
+      font-size: 17px;
+  
+}
+
+.logos{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.logos img{
+  width:150px;
+  margin-right: 20px;
+}
+
+.feedContainer{
+  max-width: 224px;
+  margin: 0 auto;
+  position: "relative";
+}
+
+.feedImages{
+  margin: 20px;
+  width: 150px;
+  height: 250px;
+  border-radius: 14px;
+  object-fit: cover;
+  box-shadow: 0px 5px 15px rgba(0,0,0, 0.25);
+}
+
+.moveUp{
+  margin-top: -318px;
+}
+
+video{
+   display: none;
+}
+
+
+
+}
