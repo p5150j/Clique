@@ -36,6 +36,8 @@ export default function NewHomeFeed({ navigation }) {
                     imageAssetURLFirebase: item.media[1],
                     userPhotoURL: item.userPhotoURL,
                     postDescription: item.description,
+                    postLikesCount: item.likesCount,
+                    postID: item.id,
                   });
                 }}
               >

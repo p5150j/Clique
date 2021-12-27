@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   View,
   Image,
@@ -14,7 +14,13 @@ import { Video } from "expo-av";
 import { StatusBar } from "expo-status-bar";
 import * as Haptics from "expo-haptics";
 
-export default function PostDetailsScreen({ route }) {
+///this is the POC for likes ======================================================
+import { getLikeById, updateLike } from "../../services/posts";
+import { throttle } from "throttle-debounce";
+import { useDispatch, useSelector } from "react-redux";
+/// end poc likes ======================================================
+
+export default function PostDetailsScreen({ route, post, user }) {
   const navigation = useNavigation();
   const { videoURLFirebase } = route.params;
   const { imageAssetURLFirebase } = route.params;
@@ -23,6 +29,43 @@ export default function PostDetailsScreen({ route }) {
 
   const video = React.useRef(null);
   const [status, setStatus] = React.useState({});
+
+  ///this is the POC for likes ======================================================
+
+  const { postLikesCount } = route.params;
+  const { postID } = route.params;
+
+  const currentUser = useSelector((state) => state.auth.currentUser);
+  const dispatch = useDispatch();
+  const [currentLikeState, setCurrentLikeState] = useState({
+    state: false,
+    counter: postLikesCount,
+  });
+
+  useEffect(() => {
+    getLikeById(postID, currentUser.uid).then((res) => {
+      setCurrentLikeState({
+        ...currentLikeState,
+        state: res,
+      });
+    });
+  }, []);
+
+  const handleUpdateLike = useMemo(
+    () =>
+      throttle(500, true, (currentLikeStateInst) => {
+        setCurrentLikeState({
+          state: !currentLikeStateInst.state,
+          counter:
+            currentLikeStateInst.counter +
+            (currentLikeStateInst.state ? -1 : 1),
+        });
+        updateLike(postID, currentUser.uid, currentLikeStateInst.state);
+      }),
+    []
+  );
+
+  /// end poc likes ======================================================
 
   return (
     <View style={{ flex: 1 }}>
@@ -61,20 +104,23 @@ export default function PostDetailsScreen({ route }) {
             }
           />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.socialButtons}>
+
+        <TouchableOpacity
+          style={styles.socialButtons}
+          onPress={() => handleUpdateLike(currentLikeState)}
+        >
           <Feather
-            name="heart"
+            color={currentLikeState.state ? "red" : "white"}
             size={22}
-            color="white"
-            onPress={() =>
-              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)
-            }
+            name="heart"
           />
+
           <View
             style={{
               position: "absolute",
               bottom: -18,
-              left: 15,
+              // left: 15,
+              textAlign: "center",
             }}
           >
             <Text
@@ -82,12 +128,14 @@ export default function PostDetailsScreen({ route }) {
                 color: "white",
                 fontWeight: "600",
                 fontSize: 12,
+                textAlign: "center",
               }}
             >
-              12
+              {currentLikeState.counter}
             </Text>
           </View>
         </TouchableOpacity>
+
         <TouchableOpacity style={styles.socialButtons}>
           <Feather
             name="send"
