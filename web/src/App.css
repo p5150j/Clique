@@ -62,12 +62,12 @@ margin: 0;
 }
 
 .feedImages{
-  margin: 20px;
+  /* margin: 20px;
   width: 250px;
   height: 370px;
   border-radius: 14px;
   object-fit: cover;
-  box-shadow: 0px 5px 15px rgba(0,0,0, 0.25);
+  box-shadow: 0px 5px 15px rgba(0,0,0, 0.25); */
 }
 
 .moveUp{
@@ -77,24 +77,76 @@ margin: 0;
 
 
 video{
-
-    position: absolute;
-    top: 86px;
-    right: 73px;
-    width: 328px;
-    border-radius: 41px;
-    /* height: 730px; */
+-webkit-animation: action 3s infinite alternate;
+    animation: action 3s infinite alternate;
     background-color: #00000085;
-    transform: rotate( 
-12deg);
-    border: 14px solid black;
-    transform: skew( 
-363deg, 
+    border: 18px solid #1d1919;
+    border-radius: 41px;
+    box-shadow: 0 16px 15px rgb(0 0 0 / 39%);
+    margin-left: 100px;
+    margin-top: 28px;
+    -webkit-transform: skew(
+363deg,
 349deg);
-    border-right: 20px solid #202020;
-    border-bottom: 20px solid #202020;
+    transform: skew(
+363deg,
+349deg);
+    -webkit-transform: rotate(
+12deg);
+    transform: rotate(
+12deg);
+    width: 359px;
 }
 
+
+* {
+    box-sizing: border-box;
+}
+
+
+.column {
+    float: left;
+    font-weight: 100;
+    height: 300px;
+    margin-top: 300px;
+    padding: 10px;
+    width: 50%;
+}
+
+.imagesLoops{
+ width: 250px;
+    height: 370px;
+    float: left;
+    margin: 20px;
+}
+
+.imagesLoops .feedImages{
+  margin: 20px;
+  width: 250px;
+  height: 370px;
+  border-radius: 14px;
+  object-fit: cover;
+  box-shadow: 0px 5px 15px rgba(0,0,0, 0.25);
+}
+
+.avatars{
+  width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    border: 2px solid white;
+    position: absolute;
+    bottom: 18px;
+    margin-left: 38px;
+
+}
+
+.userName{
+      position: absolute;
+    color: white;
+    font-size: 16px;
+    bottom: 18px;
+    margin-left: 100px;
+}
 
 
 /* /////// mobile */

@@ -56,13 +56,6 @@ function App() {
               alt=""
               width="200"
             />
-
-            <video loop="true" autoplay="autoplay" muted>
-              <source
-                src={require("../src/images/my-video.mp4")}
-                type="video/mp4"
-              />
-            </video>
           </div>
           <svg
             width="100%"
@@ -93,22 +86,69 @@ function App() {
       <div className="feedContainer">
         <div className="moveUp">
           {info.map((data) => (
-            <Frame media={data.media[1]} />
+            <div className="imagesLoops">
+              <img className="feedImages" src={data.media[1]} alt="" />
+              <h2 className="userName">@{data.userName}</h2>
+              <img
+                className="avatars"
+                src={data.userPhotoURL}
+                alt=""
+                width="200"
+              />
+            </div>
           ))}
         </div>
       </div>
 
-      <div className="feedContainer"></div>
+      <div class="feedContainer">
+        <div class="row">
+          <div class="column">
+            <h2>Mustache pork belly VHS</h2>
+            <p>
+              Cronut fanny pack you probably haven't heard of them, food truck
+              gochujang salvia brunch austin meditation heirloom sartorial echo
+              park. Cray master cleanse brunch, leggings squid meggings direct
+              trade trust fund listicle 3 wolf moon heirloom shaman. <br />
+              <br /> Chia schlitz shabby chic PBR&amp;B cliche craft beer
+              authentic. Cronut fanny pack you probably haven't heard of them,
+              food truck gochujang salvia brunch austin meditation heirloom
+              sartorial echo park. Cray master cleanse brunch, leggings squid
+              meggings direct trade trust fund listicle 3 wolf moon heirloom
+              shaman. Chia schlitz shabby chic PBR&amp;B cliche craft beer
+              authentic.Cronut fanny pack you probably haven't heard of them,
+              food truck gochujang salvia brunch austin meditation heirloom
+              sartorial echo park. <br />
+              <br />
+              Cray master cleanse brunch, leggings squid meggings direct trade
+              trust fund listicle 3 wolf moon heirloom shaman. Chia schlitz
+              shabby chic PBR&amp;B cliche craft beer authentic.Cronut fanny
+              pack you probably haven't heard of them, food truck gochujang
+              salvia brunch austin meditation heirloom sartorial echo park.{" "}
+              <br />
+              <br />
+              <br />
+              <br />
+              Cray master cleanse brunch, leggings squid meggings direct trade
+              trust fund listicle 3 wolf moon heirloom shaman. Chia schlitz
+              shabby chic
+              <br />
+              <br />
+              <br />
+              <br />
+            </p>
+          </div>
+          <div class="column">
+            <video loop="true" autoplay="autoplay" muted>
+              <source
+                src={require("../src/images/my-video.mp4")}
+                type="video/mp4"
+              />
+            </video>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
-
-const Frame = ({ media }) => {
-  return (
-    <>
-      <img className="feedImages" src={media} alt="" />
-    </>
-  );
-};
 
 export default App;
