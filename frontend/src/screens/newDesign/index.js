@@ -37,6 +37,7 @@ export default function NewHomeFeed({ navigation }) {
                     userPhotoURL: item.userPhotoURL,
                     postDescription: item.description,
                     postLikesCount: item.likesCount,
+                    userName: item.userName,
                     postID: item.id,
                   });
                 }}
@@ -46,7 +47,7 @@ export default function NewHomeFeed({ navigation }) {
                   title={item.description}
                   //need to update this when I figure out how to get the user image photoURL
                   avatarImage={{ uri: item.userPhotoURL }}
-                  userName={item.creator}
+                  userName={item.userName}
                 />
               </TouchableOpacity>
             </>
@@ -71,7 +72,7 @@ export default function NewHomeFeed({ navigation }) {
                 title={item.description}
                 //need to update this when I figure out how to get the user image photoURL
                 avatarImage={{ uri: item.userPhotoURL }}
-                userName={item.creator}
+                userName={item.userName}
               />
             </TouchableOpacity>
           </>

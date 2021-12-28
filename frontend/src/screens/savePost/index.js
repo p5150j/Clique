@@ -22,6 +22,9 @@ export default function SavePostScreen(props) {
 
   const [description, setDescription] = useState("");
   const [userPhotoURL, setUserPhotoURL] = useState(auth.currentUser.photoURL);
+  const [userName, setUserName] = useState(auth.currentUser.displayName);
+
+  // console.log("currect user url is ///////////////== " + userName);
 
   const [requestRunning, setRequestRunning] = useState(false);
 
@@ -34,6 +37,7 @@ export default function SavePostScreen(props) {
       createPost(
         description,
         userPhotoURL,
+        userName,
         props.route.params.source,
         props.route.params.sourceThumb
       )

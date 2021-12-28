@@ -6,7 +6,7 @@ import uuid from "uuid-random";
 import { CURRENT_USER_POSTS_UPDATE } from "../constants";
 
 export const createPost =
-  (description, userPhotoURL, video, thumbnail) => (dispatch) =>
+  (description, userPhotoURL, userName, video, thumbnail) => (dispatch) =>
     new Promise((resolve, reject) => {
       let storagePostId = uuid();
       let allSavePromises = Promise.all([
@@ -29,6 +29,7 @@ export const createPost =
               media,
               description,
               // I need to some how get the photoURL from the user document and add it the post document when a new video-post is made
+              userName,
               userPhotoURL,
               // userPhotoURL: auth.currentUser.photoURL,
               likesCount: 0,
