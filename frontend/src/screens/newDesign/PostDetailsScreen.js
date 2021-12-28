@@ -6,10 +6,11 @@ import {
   StyleSheet,
   Dimensions,
   TouchableOpacity,
+  Vibration,
   Platform,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Feather } from "@expo/vector-icons";
+import { Feather, Ionicons } from "@expo/vector-icons";
 import { Video } from "expo-av";
 import { StatusBar } from "expo-status-bar";
 import * as Haptics from "expo-haptics";
@@ -31,7 +32,6 @@ export default function PostDetailsScreen({ route, post, user }) {
   const [status, setStatus] = React.useState({});
 
   ///this is the POC for likes ======================================================
-
   const { postLikesCount } = route.params;
   const { postID } = route.params;
 
@@ -61,10 +61,10 @@ export default function PostDetailsScreen({ route, post, user }) {
             (currentLikeStateInst.state ? -1 : 1),
         });
         updateLike(postID, currentUser.uid, currentLikeStateInst.state);
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
       }),
     []
   );
-
   /// end poc likes ======================================================
 
   return (
@@ -109,43 +109,24 @@ export default function PostDetailsScreen({ route, post, user }) {
           style={styles.socialButtons}
           onPress={() => handleUpdateLike(currentLikeState)}
         >
-          <Feather
+          <Ionicons
             color={currentLikeState.state ? "red" : "white"}
-            size={22}
-            name="heart"
+            size={30}
+            name={currentLikeState.state ? "heart" : "heart-outline"}
           />
 
-          <View
-            style={{
-              position: "absolute",
-              bottom: -18,
-              // left: 15,
-              textAlign: "center",
-            }}
-          >
-            <Text
-              style={{
-                color: "white",
-                fontWeight: "600",
-                fontSize: 12,
-                textAlign: "center",
-              }}
-            >
-              {currentLikeState.counter}
-            </Text>
+          <View style={styles.countBubble}>
+            <Text style={styles.countText}>{currentLikeState.counter}</Text>
           </View>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.socialButtons}>
-          <Feather
-            name="send"
-            size={22}
-            color="white"
-            onPress={() =>
-              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)
-            }
-          />
+          <Ionicons color={"white"} size={30} name="chatbubble" />
+          <View style={styles.countBubble}>
+            <Text style={styles.countText}>66</Text>
+          </View>
         </TouchableOpacity>
+
         <TouchableOpacity style={styles.socialButtons}>
           <Image
             style={styles.userAvatarImage}
@@ -158,14 +139,12 @@ export default function PostDetailsScreen({ route, post, user }) {
             name="alert-circle"
             size={18}
             color="white"
-            onPress={() =>
-              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)
-            }
+            onPress={() => Vibration.vibrate()}
           />
         </TouchableOpacity>
       </View>
       <View style={styles.content}>
-        <Text style={styles.contentText}> "{postDescription}"</Text>
+        <Text style={styles.contentText}> {postDescription}</Text>
       </View>
       <StatusBar style="dark" />
     </View>
@@ -215,12 +194,12 @@ const styles = StyleSheet.create({
   socialButtons: {
     marginLeft: 10,
     marginBottom: 40,
-    width: 50,
-    height: 50,
+    width: 60,
+    height: 60,
     justifyContent: "center",
     alignItems: "center",
     padding: 10,
-    borderRadius: 25,
+    borderRadius: 30,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
 
@@ -241,7 +220,6 @@ const styles = StyleSheet.create({
     bottom: 80,
     width: 240,
     marginLeft: 20,
-    // backgroundColor: "rgba(0, 0, 0, 0.2)",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -260,9 +238,28 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
-
     borderColor: "white",
     borderStyle: "solid",
     borderWidth: 2,
+  },
+
+  countBubble: {
+    width: 25,
+    height: 25,
+    borderRadius: 13,
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+    top: 52,
+    position: "absolute",
+  },
+
+  countText: {
+    color: "red",
+    fontWeight: "600",
+    fontSize: 11,
+    textAlign: "center",
+    fontWeight: "bold",
+    padding: 4,
   },
 });
