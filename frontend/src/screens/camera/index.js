@@ -58,7 +58,7 @@ export default function CameraScreen() {
       try {
         const options = {
           maxDuration: 60,
-          quality: Camera.Constants.VideoQuality["480"],
+          quality: Camera.Constants.VideoQuality["2160"],
         };
         const videoRecordPromise = cameraRef.recordAsync(options);
         if (videoRecordPromise) {
@@ -102,6 +102,7 @@ export default function CameraScreen() {
     try {
       const { uri } = await VideoThumbnails.getThumbnailAsync(source, {
         time: 5000,
+        quality: 1,
       });
       return uri;
     } catch (e) {

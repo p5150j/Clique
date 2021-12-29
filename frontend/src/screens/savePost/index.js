@@ -6,6 +6,8 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  Keyboard,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 import styles from "./styles";
@@ -91,7 +93,14 @@ export default function SavePostScreen(props) {
         />
       </View>
 
-      <View style={styles.spacer} />
+      <TouchableWithoutFeedback
+        onPress={() => {
+          Keyboard.dismiss();
+        }}
+      >
+        <View style={styles.spacer} />
+      </TouchableWithoutFeedback>
+
       <View style={styles.buttonsContainer}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}

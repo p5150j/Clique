@@ -45,7 +45,6 @@ export default function NewHomeFeed({ navigation }) {
                 <Card
                   postImage={{ uri: item.media[1] }}
                   title={item.description}
-                  //need to update this when I figure out how to get the user image photoURL
                   avatarImage={{ uri: item.userPhotoURL }}
                   userName={item.userName}
                 />
@@ -64,13 +63,15 @@ export default function NewHomeFeed({ navigation }) {
                   imageAssetURLFirebase: item.media[1],
                   userPhotoURL: item.userPhotoURL,
                   postDescription: item.description,
+                  postLikesCount: item.likesCount,
+                  userName: item.userName,
+                  postID: item.id,
                 });
               }}
             >
               <CardLarge
                 postImage={{ uri: item.media[1] }}
                 title={item.description}
-                //need to update this when I figure out how to get the user image photoURL
                 avatarImage={{ uri: item.userPhotoURL }}
                 userName={item.userName}
               />
