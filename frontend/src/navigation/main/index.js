@@ -39,7 +39,7 @@ export default function Route() {
         ) : (
           <>
             <Stack.Screen
-              name="home"
+              name="nope"
               component={HomeScreen}
               options={{ headerShown: false }}
             />

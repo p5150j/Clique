@@ -3,6 +3,7 @@ import {
   View,
   Image,
   Text,
+  TextInput,
   StyleSheet,
   Dimensions,
   TouchableOpacity,
@@ -14,12 +15,11 @@ import { Feather, Ionicons } from "@expo/vector-icons";
 import { Video } from "expo-av";
 import { StatusBar } from "expo-status-bar";
 import * as Haptics from "expo-haptics";
-
-///this is the POC for likes ======================================================
+import { BottomSheet } from "react-native-btr";
+import styles from "./styles";
 import { getLikeById, updateLike } from "../../services/posts";
 import { throttle } from "throttle-debounce";
 import { useDispatch, useSelector } from "react-redux";
-/// end poc likes ======================================================
 
 export default function PostDetailsScreen({ route, post, user }) {
   const navigation = useNavigation();
@@ -27,14 +27,10 @@ export default function PostDetailsScreen({ route, post, user }) {
   const { imageAssetURLFirebase } = route.params;
   const { postDescription } = route.params;
   const { userPhotoURL } = route.params;
-
   const video = React.useRef(null);
   const [status, setStatus] = React.useState({});
-
-  ///this is the POC for likes ======================================================
   const { postLikesCount } = route.params;
   const { postID } = route.params;
-
   const currentUser = useSelector((state) => state.auth.currentUser);
   const dispatch = useDispatch();
   const [currentLikeState, setCurrentLikeState] = useState({
@@ -65,7 +61,12 @@ export default function PostDetailsScreen({ route, post, user }) {
       }),
     []
   );
-  /// end poc likes ======================================================
+  const [visible, setVisible] = useState(false);
+
+  const toggleBottomNavigationView = () => {
+    //Toggling the visibility state of the bottom comments sheet
+    setVisible(!visible);
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -121,7 +122,12 @@ export default function PostDetailsScreen({ route, post, user }) {
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.socialButtons}>
-          <Ionicons color={"white"} size={30} name="chatbubble" />
+          <Ionicons
+            color={"white"}
+            size={30}
+            name="chatbubble"
+            onPress={toggleBottomNavigationView}
+          />
           <View style={styles.countBubble}>
             <Text style={styles.countText}>66</Text>
           </View>
@@ -147,119 +153,32 @@ export default function PostDetailsScreen({ route, post, user }) {
         <Text style={styles.contentText}> {postDescription}</Text>
       </View>
       <StatusBar style="dark" />
+
+      <BottomSheet
+        visible={visible}
+        //setting the visibility state of the bottom shee
+        onBackButtonPress={toggleBottomNavigationView}
+        //Toggling the visibility state on the click of the back botton
+        onBackdropPress={toggleBottomNavigationView}
+        //Toggling the visibility state on the clicking out side of the sheet
+      >
+        {/*Bottom Sheet inner View*/}
+        <View style={styles.bottomNavigationView}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
+            <TextInput
+              style={styles.textInput}
+              placeholder={"comment on this post..."}
+              placeholderTextColor="lightgray"
+            />
+          </View>
+        </View>
+      </BottomSheet>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    backgroundColor: "#ecf0f1",
-  },
-  video: {
-    alignSelf: "center",
-    position: "absolute",
-    top: 0,
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
-  },
-  buttons: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  button: {
-    top: 80,
-    left: 20,
-    position: "absolute",
-  },
-  buttonRow: {
-    position: "absolute",
-    bottom: 80,
-    right: 20,
-  },
-
-  playPause: {
-    marginBottom: 40,
-    width: 70,
-    height: 70,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 10,
-    borderRadius: 35,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-  },
-
-  socialButtons: {
-    marginLeft: 10,
-    marginBottom: 40,
-    width: 60,
-    height: 60,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 10,
-    borderRadius: 30,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-  },
-
-  socialAlertButtons: {
-    marginLeft: 15,
-    marginBottom: 40,
-    width: 40,
-    height: 40,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 10,
-    borderRadius: 20,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-  },
-
-  content: {
-    position: "absolute",
-    bottom: 80,
-    width: 240,
-    marginLeft: 20,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  contentText: {
-    // color: "white",
-    color: "rgba(255,255,255, 0.9)",
-    fontSize: 33,
-    fontWeight: "600",
-    // textShadowColor: "rgba(0, 0, 0, 0.44)",
-    // textShadowOffset: { width: -1, height: 1 },
-    textShadowRadius: 10,
-    fontStyle: "italic",
-  },
-
-  userAvatarImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    borderColor: "white",
-    borderStyle: "solid",
-    borderWidth: 2,
-  },
-
-  countBubble: {
-    width: 25,
-    height: 25,
-    borderRadius: 13,
-    backgroundColor: "white",
-    justifyContent: "center",
-    alignItems: "center",
-    top: 52,
-    position: "absolute",
-  },
-
-  countText: {
-    color: "red",
-    fontWeight: "600",
-    fontSize: 11,
-    textAlign: "center",
-    fontWeight: "bold",
-    padding: 4,
-  },
-});
