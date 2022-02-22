@@ -20,6 +20,10 @@ import styles from "./styles";
 import { getLikeById, updateLike } from "../../services/posts";
 import { throttle } from "throttle-debounce";
 import { useDispatch, useSelector } from "react-redux";
+import Constants from 'expo-constants';
+import * as MailComposer from 'expo-mail-composer';
+
+
 
 export default function PostDetailsScreen({ route, post, user }) {
   const navigation = useNavigation();
@@ -67,6 +71,19 @@ export default function PostDetailsScreen({ route, post, user }) {
     //Toggling the visibility state of the bottom comments sheet
     setVisible(!visible);
   };
+
+
+
+async function sendEmailAsync() {
+  let result = await MailComposer.composeAsync({
+    recipients: ['patrick.ortell@arus.io'],
+    subject: 'Flagging this content!!!!',
+    body: 'This post is offensive content, is defamatory, obscene, pornographic, gratuitously violent or otherwise offensive has an ID of ' + postID,
+  });
+
+  alert(result.status);
+}
+
 
   return (
     <View style={{ flex: 1 }}>
@@ -121,7 +138,7 @@ export default function PostDetailsScreen({ route, post, user }) {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.socialButtons}>
+        {/* <TouchableOpacity style={styles.socialButtons}>
           <Ionicons
             color={"white"}
             size={30}
@@ -131,7 +148,7 @@ export default function PostDetailsScreen({ route, post, user }) {
           <View style={styles.countBubble}>
             <Text style={styles.countText}>66</Text>
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <TouchableOpacity style={styles.socialButtons}>
           <Image
@@ -145,7 +162,9 @@ export default function PostDetailsScreen({ route, post, user }) {
             name="alert-circle"
             size={18}
             color="white"
-            onPress={() => Vibration.vibrate()}
+            // onPress={() => Vibration.vibrate()}
+            // onPress={toggleBottomNavigationView}
+            onPress={sendEmailAsync}
           />
         </TouchableOpacity>
       </View>

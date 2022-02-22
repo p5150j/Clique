@@ -20,6 +20,7 @@ import { StatusBar } from "expo-status-bar";
 
 firebase.initializeApp({
   // firebase config
+ 
 });
 
 export default function App() {
